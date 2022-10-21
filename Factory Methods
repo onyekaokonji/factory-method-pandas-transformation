@@ -1,9 +1,3 @@
-"""
-Instructions:
-
-Fill in the methods of the DataCleaner class to produce the same printed results
-as in the comments below. Good luck, and have fun!
-"""
 from __future__ import annotations
 
 import numpy as np
@@ -22,7 +16,7 @@ class DataCleaner:
         self.current = df.copy()
         self.history = history
         self.history.append(('Initial df', self.df))
-        # ** Your code here **
+        
 
     def adjust_dtype(self, types: Dict[str, Any]) -> None:
         for k, v in types.items():
@@ -30,7 +24,7 @@ class DataCleaner:
             self.history.append(("Adjusted dtypes using {'timestamp': <class 'numpy.datetime64'>}", self.df))
 
         return self.current.dtypes
-        # ** Your code here **
+        
 
     def impute_missing(self, columns: List[str]) -> None:
         mea = self.df[columns].mean()
@@ -38,8 +32,7 @@ class DataCleaner:
         self.history.append(("Imputed missing in ['amount']", self.current))
 
         return self.current.head(10)
-        # ** Your code here **
-
+       
     def revert(self, steps_back: int = 1) -> None:
         for i, j in enumerate(self.history):
             if i == steps_back:
@@ -47,18 +40,15 @@ class DataCleaner:
                 # self.current['amount'].replace(3.951667, np.NaN, inplace=True)
         return self.current
 
-
-        # # ** Your code here **
-
     def save(self, path: str) -> None:
         return self.current.to_csv(path)
-        # ** Your code here **
-
+       
+        
     @staticmethod
     def load(path: str) -> DataCleaner:
         return pd.read_csv(path).head(7)
 
-        # ** Your code here **
+       
 
 transactions = pd.DataFrame(
     {
